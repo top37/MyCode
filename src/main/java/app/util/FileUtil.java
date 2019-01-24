@@ -2,6 +2,7 @@ package app.util;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileUtil {
@@ -15,6 +16,23 @@ public class FileUtil {
             e.printStackTrace();
         }
         return str;
+    }
+
+    public static void mkFile(String path,String content){
+        Path fpath=Paths.get(path);
+        //创建文件
+        if(!Files.exists(fpath)) {
+            try {
+                Files.createFile(fpath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            Files.write(fpath, content.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
